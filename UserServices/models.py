@@ -1,11 +1,11 @@
-from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.db import models # type: ignore
+from django.contrib.auth.models import AbstractUser # type: ignore
 
 
 class Users(AbstractUser):
     name = models.CharField(max_length=100, blank=True, null=True)
     username= models.CharField(max_length=150, unique=True, blank=False, null=False)
-    password= models.CharField(max_length=128, blank=False, null=False)
+    password= models.CharField(max_length=255, blank=False, null=False)
     email= models.EmailField(unique=True, blank=False, null=False)
     phone_number= models.CharField(max_length=15, blank=True, null=True)
     address= models.TextField(blank=True, null=True)
@@ -13,7 +13,7 @@ class Users(AbstractUser):
     state= models.CharField(max_length=50, blank=True, null=True)
     pincode= models.CharField(max_length=10, blank=True, null=True)
     date_of_birth= models.DateField(blank=True, null=True)
-    profile_picture= models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+    profile_pic=models.JSONField(blank=True, null=True)
     social_media_links= models.JSONField(blank=True, null=True)
     additional_info= models.JSONField(blank=True, null=True)
     department= models.CharField(max_length=50, blank=True, null=True, choices=[

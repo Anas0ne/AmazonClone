@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models # type: ignore
 
 from InventoryServices.models import Warehouse
 from ProductServices.models import Products
@@ -90,7 +90,7 @@ class PurchaseOrderInwardedLog(models.Model):
     purchase_order = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE, related_name='purchaseorderinwardedlog_purchase_order')
     invoice_path = models.TextField(blank=True, null=True)
     invoice_number = models.CharField(max_length=255, blank=True, null=True)
-    notes = models.CharField()
+    notes = models.CharField(max_length=255, blank=True, null=True)
     domain_user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='purchaseorderinwardedlog_domain_user', blank=True, null=True)
     inwarded_by_user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='purchaseorderinwardedlog_inwarded_by', blank=True, null=True)
     inwarded_at = models.DateTimeField(auto_now_add=True)
@@ -210,7 +210,7 @@ class SalesOrderOutwardedLog(models.Model):
     so_id = models.ForeignKey(SalesOrder, on_delete=models.CASCADE, related_name='salesorderoutwardedlog_so')
     invoice_path = models.TextField(blank=True, null=True)
     invoice_number = models.CharField(max_length=255, blank=True, null=True)
-    notes = models.CharField()
+    notes = models.CharField(max_length=255)
     status = models.CharField(max_length=50, choices=[('DRAFTS', 'Drafts'), ('COMPLETED', 'Completed'), ('CANCELLED', 'Cancelled'),('PARTIALLY DELIVERED','PARTIALLY DELIVERED'), ('DELIVERED','DELIVERED'),('RETURNED', 'Returned')], default='DRAFTS')
     domain_user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='salesorderoutwardedlog_domain_user', blank=True, null=True)
     outwarded_by_user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='salesorderoutwardedlog_outwarded_by', blank=True, null=True)
